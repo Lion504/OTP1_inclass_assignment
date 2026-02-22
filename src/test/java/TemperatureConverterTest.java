@@ -46,6 +46,31 @@ class TemperatureConverterTest {
         assertTrue(converter.isExtremeTemperature(-100), "-100C is extreme");
     }
 
+    @Test
+    void kelvinToCelsius() {
+        // Absolute zero: 0K -> -273.15°C
+        assertEquals(-273.15, converter.kelvinToCelsius(0), 0.001, "Absolute zero conversion failed");
+
+        // Freezing point of water: 273.15K -> 0°C
+        assertEquals(0.0, converter.kelvinToCelsius(273.15), 0.001, "Freezing point conversion failed");
+
+        // Boiling point of water: 373.15K -> 100°C
+        assertEquals(100.0, converter.kelvinToCelsius(373.15), 0.001, "Boiling point conversion failed");
+
+        // Example from instructions: 300K -> 26.85°C
+        assertEquals(26.85, converter.kelvinToCelsius(300), 0.001, "300K conversion failed");
+
+        // Room temperature: 293.15K -> 20°C
+        assertEquals(20.0, converter.kelvinToCelsius(293.15), 0.001, "Room temperature conversion failed");
+    }
+
+    @Test
+    void kelvinToCelsius_NegativeKelvin() {
+        // Negative Kelvin values are physically impossible but method should still calculate
+        // -1K -> -274.15°C
+        assertEquals(-274.15, converter.kelvinToCelsius(-1), 0.001, "Negative Kelvin handling failed");
+    }
+
     @RepeatedTest(5) // Runs this test 5 times with different values
     void testRoundTripConversion() {
         // 1. Generate a random Fahrenheit value between -100 and 100
