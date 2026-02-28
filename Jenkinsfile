@@ -2,16 +2,10 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven'  // Must match the name configured in Jenkins Global Tool Config
+        maven 'Maven'
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                            git 'https://github.com/Lion504/OTP1_inclass_assignment'
-            }
-        }
-
         stage('Build & Test') {
             steps {
                 sh 'mvn clean test'
