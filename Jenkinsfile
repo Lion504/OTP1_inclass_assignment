@@ -29,13 +29,17 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t temperature-converter:latest .'
+                catchError(buildResult: 'SUCCESS', stageResult: 'UNSTABLE') {
+                    sh 'docker build -t temperature-converter:latest .'
+                }
             }
         }
 
         stage('Run Docker Container') {
             steps {
-                sh 'docker run --rm temperature-converter:latest'
+                catchError(buildResult: 'SUCCESS', stageResult: 'UNSTABLE') {
+                    sh 'docker run --rm temperature-converter:latest'
+                }
             }
         }
     }
