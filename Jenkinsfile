@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/YOUR_USERNAME/temperature-converter.git'
+                            git 'https://github.com/Lion504/OTP1_inclass_assignment'
             }
         }
 
